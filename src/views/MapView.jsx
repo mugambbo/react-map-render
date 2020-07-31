@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { GoogleMap as Map, LoadScript, Marker, MarkerClusterer, Polyline, Polygon } from '@react-google-maps/api'
+import { GoogleMap as Map, Marker, MarkerClusterer, Polyline, Polygon, LoadScript } from '@react-google-maps/api'
 import NavUtils, { BundleKeys } from '../utils/NavUtils';
 import CommonUtils from '../utils/CommonUtils';
 import * as Sentry from '@sentry/react';
@@ -16,15 +16,16 @@ class MapView extends Component {
             polylinePath: [],
             polygonPath: [],
             mapTypeId: 'roadmap',
-            apikey: process.env.REACT_APP_GGLE_KEY
+            apikey: process.env.REACT_APP_GGLE_KEY,
+            load: false
         }
     }
     render() { 
-        const { entities, apikey, zoom, center, polylinePath, polygonPath, mapTypeId } = this.state;
+        const { entities, apikey, zoom, center, polylinePath, polygonPath, mapTypeId, load } = this.state;
         return (
             <>
             <LoadScript googleMapsApiKey={apikey} loadingElement={<Loading />}>
-                <Map id='map-location' mapTypeId={mapTypeId} mapContainerStyle={{width: '100%', height: '100%', position: 'absolute'}} zoom={zoom} options={this.options}
+                {load? (<Map id='map-location' mapTypeId={mapTypeId} mapContainerStyle={{width: '100%', height: '100%', position: 'absolute'}} zoom={zoom} options={this.options}
                     onIdle={this.handleMapIdle}
                     onLoad={this.onMapLoad} center={center} onClick={this.onMapClick} onDrag={this.handleMapDrag} >
                         <MarkerClusterer styles={clusterStyles} >{clusterer => (
@@ -52,14 +53,20 @@ class MapView extends Component {
                             onLoad={this.onPolylineLoad}
                             path={polylinePath}
                             options={this.polylineOptions} />
-                </Map>
+                </Map>): <></>}
             </LoadScript>    
             <Signature />
             </>           
         );
     }
 
-    componentDidMount(){          
+    componentDidMount(){   
+        const { location } = this.props;
+        const apikey = NavUtils.getQueryParam(location, BundleKeys.apikey) || process.env.REACT_APP_GGLE_KEY;
+        this.setState({
+            load: true,
+            apikey: apikey
+        });
     }
 
     onPolylineLoad = (polyline) => {
@@ -82,7 +89,6 @@ class MapView extends Component {
         const coordinatesParams = NavUtils.getQueryParam(location, BundleKeys.coordinates);
         const coordinates = CommonUtils.getPoints(coordinatesParams);
         const geoCoordinatesParams = NavUtils.getQueryParam(location, BundleKeys.geocoord);
-        const apikey = NavUtils.getQueryParam(location, BundleKeys.apikey) || process.env.REACT_APP_GGLE_KEY;
         const geoCoordinates = CommonUtils.getPoints(geoCoordinatesParams);
 
         const mapTypeParams = String(NavUtils.getQueryParam(location, BundleKeys.mapType) || 'roadmap');
@@ -96,7 +102,6 @@ class MapView extends Component {
             polylinePath: coordinates,
             polygonPath: geoCoordinates,
             mapTypeId: mapTypeId,
-            apikey: apikey
         })
 
         const allPoints = [...coordinates, ...geoCoordinates, ...points];

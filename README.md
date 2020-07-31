@@ -1,68 +1,36 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  <img src="public/demo/screenshot.png" alt="React Map Render Demo" />
+</p>
 
-## Available Scripts
 
-In the project directory, you can run:
+# React Map Render 
+[![React Map Render](https://github.com/mugambbo/react-map-render/blob/master/public/logo192.png)]
+> A simple react app that renders different map data passed to it as query parameters on a Google Map layer. Components that can be rendered included polygon, polyline and markers
 
-### `npm start`
+# Getting Started
+You can view a live demo at https://react-map-render.surge.sh
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To get the app running:
+1. Clone the repository
+2. Run `npm install` to install all the required dependencies
+3. Run `npm start` to start the local server
+Note: This project uses [Create React App](https://github.com/facebook/create-react-app)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+# Usage Guide
+To create a embeddable link, simply provide the required parameters as part of the url:
 
-### `npm test`
+**Key** | **Default** | **Description**
+`zoom` | 3 | This is the zoom level to which the map will be displayed. Ranges from 0 (min) to 22 (max). For `geocoord` and `coord` and multiple `points`, If no zoom level is provided, the location bounds are used.
+`center` | 3.444,3.4444 | This is the initial center of the map. For `geocoord` and `coord` and multiple `points`, If no center is provided, the center of the location bounds are used.
+`coord` | | Pipe separated latitude/longitude pair. Example: `9.11058245073946,7.480727975272465|9.10227706021901,7.477981393241215|9.092106931589456,7.474204842948247|9.088208305665116,7.471801583670903`. This displays the points on the map as a dotted polyline
+`geocoord` | | Pipe separated latitude/longitude pair. Example: `9.11058245073946,7.480727975272465|9.10227706021901,7.477981393241215|9.092106931589456,7.474204842948247|9.088208305665116,7.471801583670903`. This displays the points on the map as a continuous polygon filled with a transparent blue colour
+`points` | | Pipe separated latitude/longitude pair. Example: `9.11058245073946,7.480727975272465|9.10227706021901,7.477981393241215|9.092106931589456,7.474204842948247|9.088208305665116,7.471801583670903`. This displays the points on the map as a markers on every point
+`maptype` | roadmap | This can either be `roadmap`, `terrain`, `hybrid` or `satellite` and determines the map layer used
+`apikey` | | Since Google requires an API key to access Google Maps (without which a watermark is displayed over the map layer), visit [Get API Key](https://developers.google.com/maps/documentation/javascript/get-api-key) to create one
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Examples
+ **Description** | **URL**
+ Polygon with a marker at it's center | `http://localhost:3000/?geocoord=9.11058245073946,7.480727975272465|9.10227706021901,7.477981393241215|9.092106931589456,7.474204842948247|9.088208305665116,7.471801583670903|9.082106023381849,7.462360207938481|9.076003637204174,7.455322091483403|9.06786696080368,7.452232186698247|9.05735681419275,7.453948800467778|9.048033039774012,7.454292123221684|9.038369964055587,7.459785287284184|9.031249637096655,7.46562177410059|9.024807315319858,7.4743765043252|9.017008561346579,7.485877816581059|9.012430953375835,7.491714303397465|9.020229806241822,7.497722451590825|9.027011280458105,7.502013986014653|9.035996537369947,7.505275552176762|9.042608187092915,7.510253732108403|9.047524463308974,7.516948525809575|9.054983512732594,7.523128335379887|9.06345951740757,7.525016610526372|9.071257265058717,7.5238149808877|9.079563375096665,7.5183218168252|9.083801112218262,7.512142007254887|9.089903365629993,7.50956708660059|9.097870039970381,7.5056188749306685|9.10227706021901,7.498924081229497|9.105497540673266,7.491542642020512|9.110751946495554,7.481242959403325`
+ Polyline | `http://localhost:3000/?coord=9.11058245073946,7.480727975272465|9.10227706021901,7.477981393241215|9.092106931589456,7.474204842948247|9.088208305665116,7.471801583670903|9.082106023381849,7.462360207938481|9.076003637204174,7.455322091483403|9.06786696080368,7.452232186698247|9.05735681419275,7.453948800467778|9.048033039774012,7.454292123221684|9.038369964055587,7.459785287284184|9.031249637096655,7.46562177410059|9.024807315319858,7.4743765043252|9.017008561346579,7.485877816581059|9.012430953375835,7.491714303397465|9.020229806241822,7.497722451590825|9.027011280458105,7.502013986014653|9.035996537369947,7.505275552176762|9.042608187092915,7.510253732108403|9.047524463308974,7.516948525809575|9.054983512732594,7.523128335379887|9.06345951740757,7.525016610526372|9.071257265058717,7.5238149808877|9.079563375096665,7.5183218168252|9.083801112218262,7.512142007254887|9.089903365629993,7.50956708660059|9.097870039970381,7.5056188749306685|9.10227706021901,7.498924081229497|9.105497540673266,7.491542642020512|9.110751946495554,7.481242959403325`
+Cluster of markers | `http://localhost:3000/?points=9.11058245073946,7.480727975272465|9.10227706021901,7.477981393241215|9.092106931589456,7.474204842948247|9.088208305665116,7.471801583670903|9.082106023381849,7.462360207938481|9.076003637204174,7.455322091483403|9.06786696080368,7.452232186698247|9.05735681419275,7.453948800467778|9.048033039774012,7.454292123221684|9.038369964055587,7.459785287284184|9.031249637096655,7.46562177410059|9.024807315319858,7.4743765043252|9.017008561346579,7.485877816581059|9.012430953375835,7.491714303397465|9.020229806241822,7.497722451590825|9.027011280458105,7.502013986014653|9.035996537369947,7.505275552176762|9.042608187092915,7.510253732108403|9.047524463308974,7.516948525809575|9.054983512732594,7.523128335379887|9.06345951740757,7.525016610526372|9.071257265058717,7.5238149808877|9.079563375096665,7.5183218168252|9.083801112218262,7.512142007254887|9.089903365629993,7.50956708660059|9.097870039970381,7.5056188749306685|9.10227706021901,7.498924081229497|9.105497540673266,7.491542642020512|9.110751946495554,7.481242959403325`
