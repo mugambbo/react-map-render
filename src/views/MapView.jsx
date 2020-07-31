@@ -82,7 +82,7 @@ class MapView extends Component {
         const coordinatesParams = NavUtils.getQueryParam(location, BundleKeys.coordinates);
         const coordinates = CommonUtils.getPoints(coordinatesParams);
         const geoCoordinatesParams = NavUtils.getQueryParam(location, BundleKeys.geocoord);
-        const apikey = NavUtils.getQueryParam(location, BundleKeys.apikey) || process.env.process.env.REACT_APP_GGLE_KEY;
+        const apikey = NavUtils.getQueryParam(location, BundleKeys.apikey) || process.env.REACT_APP_GGLE_KEY;
         const geoCoordinates = CommonUtils.getPoints(geoCoordinatesParams);
 
         const mapTypeParams = String(NavUtils.getQueryParam(location, BundleKeys.mapType) || 'roadmap');
